@@ -27,15 +27,15 @@ namespace StreamWithExamples
             MemoryStream ms = new MemoryStream();
             CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write);
 
-
+            //inputStream.Position = 0;
             byte[] toEncrypt = StreamToByteArray(inputStream);
 
-           cs.Write(toEncrypt, 0, 5);
+           cs.Write(toEncrypt, 0, toEncrypt.Length);
            cs.FlushFinalBlock();
 
             MemoryStream output = new MemoryStream(ms.ToArray());
             ms.Close();
-            return output;
+            return (Stream)output;
          
         }
 
@@ -58,17 +58,21 @@ namespace StreamWithExamples
             rijndaelCSP.Key = derviedKey.GetBytes(rijndaelCSP.KeySize / 8);
             rijndaelCSP.IV = derviedKey.GetBytes(rijndaelCSP.BlockSize / 8);
 
-            var encryptor = rijndaelCSP.CreateDecryptor();
-
-            MemoryStream ms = new MemoryStream();
-            CryptoStream cs = new CryptoStream(ms, encryptor,CryptoStreamMode.Write);
-
+            var decryptor = rijndaelCSP.CreateDecryptor();
+            //inputStream.Position = 0;
             byte[] arrayOfEncrypedStream = StreamToByteArray(inputStream);
 
-            cs.Write(arrayOfEncrypedStream, 0, arrayOfEncrypedStream.Length);
+            MemoryStream ms = new MemoryStream(arrayOfEncrypedStream);
+            CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
+
+
+            cs.Read(arrayOfEncrypedStream, 0, arrayOfEncrypedStream.Length);
             MemoryStream output = new MemoryStream(ms.ToArray());
 
+            ms.Close();
             return output;
+
+
 
         }
 
