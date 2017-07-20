@@ -25,7 +25,13 @@ namespace StreamWithExamples
 
            var cryptedStream =  Demo2.EncryptStream(ms);
 
-            
+            //Is my stream  really encrypted?
+           string isCryptedStreamAfterEncryption = Demo3.IsCryptedStream(cryptedStream);
+
+
+            var decryptStream = Demo2.DecryptStream(cryptedStream);
+            string isCryptedStreamAfterDecryption = Demo3.IsCryptedStream(decryptStream);
+
 
         }
     }

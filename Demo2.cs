@@ -30,7 +30,7 @@ namespace StreamWithExamples
 
             byte[] toEncrypt = StreamToByteArray(inputStream);
 
-           cs.Write(toEncrypt, 0, 2);
+           cs.Write(toEncrypt, 0, 5);
            cs.FlushFinalBlock();
 
             MemoryStream output = new MemoryStream(ms.ToArray());
@@ -39,7 +39,7 @@ namespace StreamWithExamples
          
         }
 
-        private static byte[] StreamToByteArray(Stream inputStream)
+        public static byte[] StreamToByteArray(Stream inputStream)
         {
 
             var ms = new MemoryStream();
@@ -49,6 +49,26 @@ namespace StreamWithExamples
         }
         public static Stream DecryptStream (Stream inputStream)
         {
+            string key = "ThisIsMySuperSecureKey";
+            byte[] keyBytes = Encoding.Unicode.GetBytes(key);
+
+            Rfc2898DeriveBytes derviedKey = new Rfc2898DeriveBytes(key, keyBytes);
+
+            RijndaelManaged rijndaelCSP = new RijndaelManaged();
+            rijndaelCSP.Key = derviedKey.GetBytes(rijndaelCSP.KeySize / 8);
+            rijndaelCSP.IV = derviedKey.GetBytes(rijndaelCSP.BlockSize / 8);
+
+            var encryptor = rijndaelCSP.CreateDecryptor();
+
+            MemoryStream ms = new MemoryStream();
+            CryptoStream cs = new CryptoStream(ms, encryptor,CryptoStreamMode.Write);
+
+            byte[] arrayOfEncrypedStream = StreamToByteArray(inputStream);
+
+            cs.Write(arrayOfEncrypedStream, 0, arrayOfEncrypedStream.Length);
+            MemoryStream output = new MemoryStream(ms.ToArray());
+
+            return output;
 
         }
 
