@@ -14,7 +14,7 @@ namespace StreamWithExamples
         public static Stream EncryptStream(Stream inputStream)
         {
             string key = "ThisIsMySuperSecureKey";
-            byte[] keyBytes = Encoding.Unicode.GetBytes(key);
+            byte[] keyBytes = Encoding.UTF32.GetBytes(key);
 
             Rfc2898DeriveBytes derviedKey = new Rfc2898DeriveBytes(key,keyBytes);
 
@@ -50,7 +50,7 @@ namespace StreamWithExamples
         public static Stream DecryptStream (Stream inputStream)
         {
             string key = "ThisIsMySuperSecureKey";
-            byte[] keyBytes = Encoding.Unicode.GetBytes(key);
+            byte[] keyBytes = Encoding.UTF32.GetBytes(key);
 
             Rfc2898DeriveBytes derviedKey = new Rfc2898DeriveBytes(key, keyBytes);
 
@@ -65,7 +65,7 @@ namespace StreamWithExamples
             MemoryStream ms = new MemoryStream(arrayOfEncrypedStream);
             CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
 
-
+            
             cs.Read(arrayOfEncrypedStream, 0, arrayOfEncrypedStream.Length);
             MemoryStream output = new MemoryStream(ms.ToArray());
 

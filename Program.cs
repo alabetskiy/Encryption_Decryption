@@ -18,10 +18,10 @@ namespace StreamWithExamples
 
 
             //Some string for demo2 v
-            
-            byte[] streamBytes = Encoding.ASCII.GetBytes("Hello everybody!");
-            MemoryStream ms = new MemoryStream();
-            ms.Write(streamBytes,0,streamBytes.Length);
+            byte[] streamBytes = Encoding.UTF32.GetBytes("Hello everybody!");
+            MemoryStream ms = new MemoryStream(streamBytes);
+            //ms.Write(streamBytes, 0, streamBytes.Length);
+           
             //Some string for demo2 ^
 
            var cryptedStream =  Demo2.EncryptStream(ms);

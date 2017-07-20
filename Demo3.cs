@@ -13,7 +13,7 @@ namespace StreamWithExamples
         {
             string result = "";
             byte[] convStremToBytes = Demo2.StreamToByteArray(cryptedStream);
-            return result = Encoding.ASCII.GetString(convStremToBytes);
+            return result = Encoding.UTF32.GetString(convStremToBytes);
         }
     }
 }
