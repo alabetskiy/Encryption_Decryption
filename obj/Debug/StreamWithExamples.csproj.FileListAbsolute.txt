@@ -1,0 +1,6 @@
+C:\Development_Artem\StreamWithExamples\StreamWithExamples\bin\Debug\StreamWithExamples.exe.config
+C:\Development_Artem\StreamWithExamples\StreamWithExamples\bin\Debug\StreamWithExamples.exe
+C:\Development_Artem\StreamWithExamples\StreamWithExamples\bin\Debug\StreamWithExamples.pdb
+C:\Development_Artem\StreamWithExamples\StreamWithExamples\obj\Debug\StreamWithExamples.csprojResolveAssemblyReference.cache
+C:\Development_Artem\StreamWithExamples\StreamWithExamples\obj\Debug\StreamWithExamples.exe
+C:\Development_Artem\StreamWithExamples\StreamWithExamples\obj\Debug\StreamWithExamples.pdb
