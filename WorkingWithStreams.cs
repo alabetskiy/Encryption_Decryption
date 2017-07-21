@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StreamWithExamples
 {
-    class Demo1
+    class WorkingWithStreams
     {
         public static void AddTwoByteArraysToMemoryStreamObject()
         {

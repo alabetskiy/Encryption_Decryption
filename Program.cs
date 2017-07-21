@@ -12,31 +12,34 @@ namespace StreamWithExamples
         static void Main(string[] args)
         {
 
-//WORKING WITH STREAMS
+        //WORKING WITH STREAMS
         //two byte arrays added to MemoryStream, than read to string
-        Demo1.AddTwoByteArraysToMemoryStreamObject();
-        Demo1.AddTwoByteArraysToMemoryStreamObject1();
+        WorkingWithStreams.AddTwoByteArraysToMemoryStreamObject();
+        WorkingWithStreams.AddTwoByteArraysToMemoryStreamObject1();
 
 
 
- //WORKING WITH STREAM ENCRYPTION AND DECRYPTION 
+        //WORKING WITH STREAM ENCRYPTION AND DECRYPTION 
         //Some string for demo2 v
-        byte[] streamBytes = Encoding.UTF32.GetBytes("Hello everybody!");
+        string toEncrypt = "Hello everybody";
+        byte[] streamBytes = Encoding.UTF32.GetBytes(toEncrypt);
         MemoryStream ms = new MemoryStream(streamBytes);
         //Some string for demo2 ^
 
-        var cryptedStream =  Demo2.EncryptStream(ms);
-
-
+        var cryptedStream =  Encryption.EncryptStream(ms);
         //Is my stream encrypted?
         string isCryptedStreamAfterEncryption = Demo3.IsCryptedStream(cryptedStream);
         Console.WriteLine($"After Encryption:{isCryptedStreamAfterEncryption}");
 
-
-        var decryptStream = Demo2.DecryptStream(cryptedStream);
+        //Trying to decrypt the stream
+        var decryptStream = Encryption.DecryptStream(cryptedStream);
         string isCryptedStreamAfterDecryption = Demo3.IsCryptedStream(decryptStream);
         Console.WriteLine($"After Decryption: {isCryptedStreamAfterDecryption}");
         Console.ReadLine();
+
+       
+
+
         }
     }
 }

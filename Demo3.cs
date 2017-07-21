@@ -12,7 +12,7 @@ namespace StreamWithExamples
         internal static string IsCryptedStream(Stream cryptedStream)
         {
             string result = "";
-            byte[] convStremToBytes = Demo2.StreamToByteArray(cryptedStream);
+            byte[] convStremToBytes = Encryption.StreamToByteArray(cryptedStream);
             return result = Encoding.UTF32.GetString(convStremToBytes);
         }
     }
