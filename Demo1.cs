@@ -32,9 +32,6 @@ namespace StreamWithExamples
             var str = System.Text.Encoding.Default.GetString(ms.ToArray());
             //I don't even need a StreamReader to get my string value from stream.
 
-            StreamReader sr = new StreamReader(ms, Encoding.ASCII);
-            string cont = sr.ReadToEnd();
-
         }
         public static void AddTwoByteArraysToMemoryStreamObject1()
         {

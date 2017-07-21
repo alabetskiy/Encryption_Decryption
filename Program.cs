@@ -12,29 +12,31 @@ namespace StreamWithExamples
         static void Main(string[] args)
         {
 
-
-            //two byte arrays added to MemoryStream, than read to string
-            Demo1.AddTwoByteArraysToMemoryStreamObject();
-
-
-            //Some string for demo2 v
-            byte[] streamBytes = Encoding.UTF32.GetBytes("Hello everybody!");
-            MemoryStream ms = new MemoryStream(streamBytes);
-            //ms.Write(streamBytes, 0, streamBytes.Length);
-           
-            //Some string for demo2 ^
-
-           var cryptedStream =  Demo2.EncryptStream(ms);
-
-            //Is my stream  really encrypted?
-           string isCryptedStreamAfterEncryption = Demo3.IsCryptedStream(cryptedStream);
-            Console.WriteLine($"After Encryption:{isCryptedStreamAfterEncryption}");
+//WORKING WITH STREAMS
+        //two byte arrays added to MemoryStream, than read to string
+        Demo1.AddTwoByteArraysToMemoryStreamObject();
+        Demo1.AddTwoByteArraysToMemoryStreamObject1();
 
 
-            var decryptStream = Demo2.DecryptStream(cryptedStream);
-            string isCryptedStreamAfterDecryption = Demo3.IsCryptedStream(decryptStream);
-            Console.WriteLine($"After Decryption: {isCryptedStreamAfterDecryption}");
-            Console.ReadLine();
+
+ //WORKING WITH STREAM ENCRYPTION AND DECRYPTION 
+        //Some string for demo2 v
+        byte[] streamBytes = Encoding.UTF32.GetBytes("Hello everybody!");
+        MemoryStream ms = new MemoryStream(streamBytes);
+        //Some string for demo2 ^
+
+        var cryptedStream =  Demo2.EncryptStream(ms);
+
+
+        //Is my stream encrypted?
+        string isCryptedStreamAfterEncryption = Demo3.IsCryptedStream(cryptedStream);
+        Console.WriteLine($"After Encryption:{isCryptedStreamAfterEncryption}");
+
+
+        var decryptStream = Demo2.DecryptStream(cryptedStream);
+        string isCryptedStreamAfterDecryption = Demo3.IsCryptedStream(decryptStream);
+        Console.WriteLine($"After Decryption: {isCryptedStreamAfterDecryption}");
+        Console.ReadLine();
         }
     }
 }
