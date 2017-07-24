@@ -83,6 +83,7 @@ namespace StreamWithExamples
             return Convert.ToBase64String(encryptedData);
         }
 
+        //Encrypt a byte array into a byte array. 
         public static byte[] Encrypt(byte[] clearBytes, byte[] Key, byte[] IV)
         {
             MemoryStream ms = new MemoryStream();
@@ -99,8 +100,58 @@ namespace StreamWithExamples
 
         public static string Decrypt(string cipherText)
         {
-            string passwod = "ThisIsMySuperSecureKey";
-            return "";
+            string password = "ThisIsMySuperSecureKey";
+            byte[] cipherBytes = new byte[0];
+            try
+            {
+                if (string.IsNullOrWhiteSpace(cipherText)==false)
+                {
+                    cipherText = cipherText.Replace(' ', '+');
+                    if (cipherText.Length%4 !=0)
+                    {
+                        for (int i = cipherText.Length % 4; i < 4; i++)
+                        {
+                            cipherText += "=";
+                        }
+                    }
+                    cipherBytes = Convert.FromBase64String(cipherText);
+
+                }
+             
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            PasswordDeriveBytes pdb = new PasswordDeriveBytes(password, new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+
+            byte[] decryptedData = Decrypt(cipherBytes, pdb.GetBytes(32), pdb.GetBytes(16));
+
+            return Encoding.Unicode.GetString(decryptedData);
+        }
+
+
+
+        //Decrypt a byte array into a byte array
+        private static byte[] Decrypt(byte[] cipherBytes, byte[] Key, byte[] IV)
+        {
+            byte[] decryptData;
+            using (MemoryStream ms = new MemoryStream())
+            {
+                Rijndael alg = Rijndael.Create();
+                alg.Key = Key;
+                alg.IV = IV;
+
+                using (CryptoStream cs = new CryptoStream(ms,alg.CreateDecryptor(),CryptoStreamMode.Write))
+                {
+                    cs.Write(cipherBytes, 0, cipherBytes.Length);
+                    cs.FlushFinalBlock();
+
+                    decryptData = ms.ToArray();
+                }
+
+            }
+            return decryptData;
         }
     }
 }

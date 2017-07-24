@@ -22,7 +22,7 @@ namespace StreamWithExamples
         //WORKING WITH STREAM ENCRYPTION AND DECRYPTION 
         //Some string for demo2 v
         string toEncrypt = "Hello everybody";
-        byte[] streamBytes = Encoding.UTF32.GetBytes(toEncrypt);
+        byte[] streamBytes = Encoding.Unicode.GetBytes(toEncrypt);
         MemoryStream ms = new MemoryStream(streamBytes);
         //Some string for demo2 ^
 
@@ -37,8 +37,15 @@ namespace StreamWithExamples
         Console.WriteLine($"After Decryption: {isCryptedStreamAfterDecryption}");
         Console.ReadLine();
 
-       
 
+            //Trying to encrypt some text
+            string name = "Artem";
+           string cipherText =  Encryption.Encrypt(name);
+
+            //Tring to dectypt some cipherText
+            string decryppedText=Encryption.Decrypt(cipherText);
+            Console.WriteLine(decryppedText);
+            Console.ReadLine();
 
         }
     }
